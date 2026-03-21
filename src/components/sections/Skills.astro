@@ -1,0 +1,92 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import { skills, skillCategories } from '../../data/skills';
+---
+
+<section id="skills" class="py-24 bg-[var(--bg-alt)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="anim fade-up">
+      <SectionHeading
+        overline="SKILLS"
+        title="What I Work With"
+        subtitle="Technologies and tools I use to build robust systems."
+        align="center"
+      />
+    </div>
+
+    <!-- Category tabs -->
+    <div class="flex flex-wrap justify-center gap-2 mb-10 anim fade-up" style="transition-delay: 100ms">
+      <button
+        class="skill-tab active px-4 py-2 rounded-full text-xs font-semibold border transition-all duration-200"
+        data-category="all"
+      >
+        All
+      </button>
+      {skillCategories.map(cat => (
+        <button
+          class="skill-tab px-4 py-2 rounded-full text-xs font-semibold border transition-all duration-200"
+          data-category={cat}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Skills grid -->
+    <div
+      id="skills-grid"
+      class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3 stagger"
+    >
+      {skills.map(skill => (
+        <div
+          class="skill-item anim scale-in card p-3 flex flex-col items-center gap-2 text-center cursor-default"
+          data-category={skill.category}
+        >
+          <span class="text-2xl" role="img" aria-label={skill.name}>{skill.icon}</span>
+          <span class="text-xs font-medium text-[var(--text-secondary)] leading-tight">{skill.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skill-tab {
+    border-color: var(--border);
+    color: var(--text-secondary);
+    background: transparent;
+  }
+  .skill-tab:hover {
+    border-color: rgba(0,212,255,0.4);
+    color: var(--text-primary);
+    background: rgba(0,212,255,0.05);
+  }
+  .skill-tab.active {
+    background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(124,58,237,0.15));
+    border-color: rgba(0,212,255,0.4);
+    color: #00D4FF;
+  }
+  .skill-item {
+    transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.2s, box-shadow 0.2s;
+  }
+  .skill-item.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll('.skill-tab');
+  const items = document.querySelectorAll('.skill-item') as NodeListOf<HTMLElement>;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = (tab as HTMLElement).dataset.category;
+      items.forEach(item => {
+        const match = cat === 'all' || item.dataset.category === cat;
+        item.classList.toggle('hidden', !match);
+      });
+    });
+  });
+</script>

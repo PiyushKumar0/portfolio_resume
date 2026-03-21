@@ -1,0 +1,200 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import Badge from '../ui/Badge.astro';
+import { projects } from '../../data/projects';
+---
+
+<section id="projects" class="py-24 bg-[var(--bg-primary)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="anim fade-up">
+      <SectionHeading overline="PROJECTS" title="Things I've Built" />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {projects.map((project, i) => (
+        <button
+          class={`card group flex flex-col text-left cursor-pointer w-full anim scale-in ${project.featured ? 'md:col-span-2' : ''}`}
+          style={`transition-delay: ${i * 100}ms`}
+          data-project={i}
+          aria-label={`View details for ${project.title}`}
+        >
+          <div class="p-6 flex flex-col flex-1">
+            <!-- Header row: category + highlight badges -->
+            <div class="flex flex-wrap gap-2 mb-4">
+              <Badge text={project.category} variant="category" />
+              {project.highlight && <Badge text={project.highlight} variant="highlight" />}
+            </div>
+
+            <!-- Title + arrow -->
+            <div class="flex items-start justify-between gap-3 mb-3">
+              <h3 class="font-display font-semibold text-[var(--text-primary)] text-base leading-snug group-hover:text-accent-cyan transition-colors">
+                {project.title}
+              </h3>
+              <svg class="w-4 h-4 text-[var(--text-tertiary)] group-hover:text-accent-cyan group-hover:translate-x-1 transition-all flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </div>
+
+            <!-- Description -->
+            <p class="text-sm text-[var(--text-secondary)] leading-relaxed flex-1">
+              {project.description}
+            </p>
+
+            <!-- Tech badges -->
+            <div class="flex flex-wrap gap-1.5 mt-4">
+              {project.tech.slice(0, 4).map(t => (
+                <Badge text={t} variant="skill" />
+              ))}
+              {project.tech.length > 4 && (
+                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs text-[var(--text-tertiary)] border border-[var(--border)]">
+                  +{project.tech.length - 4} more
+                </span>
+              )}
+            </div>
+
+            <!-- Footer -->
+            <div class="flex items-center justify-between mt-4 pt-4 border-t border-[var(--border)]">
+              <span class="text-xs text-[var(--text-tertiary)] font-mono">{project.year}</span>
+              {project.demo ? (
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-1.5 text-xs text-accent-cyan font-medium hover:underline"
+                  onclick="event.stopPropagation()"
+                >
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  Live Demo
+                </a>
+              ) : project.github ? (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-1.5 text-xs text-accent-cyan font-medium hover:underline"
+                  onclick="event.stopPropagation()"
+                >
+                  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
+                </a>
+              ) : null}
+            </div>
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Modal overlay -->
+<div
+  id="project-modal"
+  class="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none opacity-0 transition-opacity duration-300"
+  aria-modal="true"
+  role="dialog"
+  aria-hidden="true"
+>
+  <!-- Backdrop -->
+  <div id="modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+
+  <!-- Modal card -->
+  <div
+    id="modal-card"
+    class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-[var(--bg-surface)] border border-[var(--border)] shadow-2xl translate-y-6 transition-transform duration-300"
+  >
+    <!-- Close button -->
+    <button
+      id="modal-close"
+      class="absolute top-4 right-4 w-8 h-8 rounded-lg flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-alt)] transition-all z-10"
+      aria-label="Close"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Modal content (filled by JS) -->
+    <div id="modal-content" class="p-8"></div>
+  </div>
+</div>
+
+<script>
+  import type { Project } from '../../data/projects';
+  import { projects } from '../../data/projects';
+
+  const modal       = document.getElementById('project-modal')!;
+  const modalCard   = document.getElementById('modal-card')!;
+  const modalClose  = document.getElementById('modal-close')!;
+  const modalContent= document.getElementById('modal-content')!;
+  const backdrop    = document.getElementById('modal-backdrop')!;
+
+  function openModal(index: number) {
+    const p = projects[index];
+
+    modalContent.innerHTML = `
+      <div class="flex flex-wrap items-center gap-2 mb-5 pr-10">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border bg-accent-teal/10 border-accent-teal/25 text-accent-teal">${p.category}</span>
+        ${p.highlight ? `<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border bg-gradient-to-r from-accent-cyan/10 to-accent-violet/10 border-accent-cyan/20 text-accent-cyan">${p.highlight}</span>` : ''}
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-mono text-[var(--text-tertiary)] border border-[var(--border)]">${p.year}</span>
+      </div>
+
+      <h2 class="font-display font-bold text-2xl text-[var(--text-primary)] mb-4 pr-8">${p.title}</h2>
+
+      <p class="text-[var(--text-secondary)] leading-relaxed mb-6">${p.longDescription || p.description}</p>
+
+      <div class="mb-6">
+        <p class="text-xs font-mono text-accent-cyan uppercase tracking-wider mb-3">// Tech Stack</p>
+        <div class="flex flex-wrap gap-2">
+          ${p.tech.map(t => `<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border bg-accent-cyan/10 border-accent-cyan/25 text-accent-cyan font-mono">${t}</span>`).join('')}
+        </div>
+      </div>
+
+      ${(p.github || p.demo) ? `
+      <div class="flex flex-wrap gap-3 pt-6 border-t border-[var(--border)]">
+        ${p.github ? `
+          <a href="${p.github}" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-[var(--border)] text-sm font-medium text-[var(--text-secondary)] hover:text-accent-cyan hover:border-accent-cyan/40 transition-all">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            View on GitHub
+          </a>` : ''}
+        ${p.demo ? `
+          <a href="${p.demo}" target="_blank" rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-accent-cyan to-accent-violet text-white text-sm font-semibold hover:brightness-110 transition-all">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            Live Demo
+          </a>` : ''}
+      </div>` : ''}
+    `;
+
+    modal.setAttribute('aria-hidden', 'false');
+    modal.style.pointerEvents = 'auto';
+    modal.style.opacity = '1';
+    modalCard.style.transform = 'translateY(0)';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.setAttribute('aria-hidden', 'true');
+    modal.style.opacity = '0';
+    modal.style.pointerEvents = 'none';
+    modalCard.style.transform = 'translateY(24px)';
+    document.body.style.overflow = '';
+  }
+
+  // Open on card click
+  document.querySelectorAll('[data-project]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt((btn as HTMLElement).dataset.project || '0', 10);
+      openModal(idx);
+    });
+  });
+
+  // Close handlers
+  modalClose.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>

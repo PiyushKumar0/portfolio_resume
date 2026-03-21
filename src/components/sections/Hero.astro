@@ -1,0 +1,187 @@
+---
+import TerminalWindow from '../ui/TerminalWindow.astro';
+---
+
+<section id="hero" class="relative min-h-screen flex items-center overflow-hidden grid-bg">
+
+  <!-- Background blobs -->
+  <div class="absolute inset-0 hero-glow pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute top-1/4 right-1/4 w-96 h-96 rounded-full opacity-[0.08] blur-3xl bg-accent-violet pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute bottom-0 right-0 w-80 h-80 rounded-full opacity-[0.04] blur-3xl bg-accent-cyan pointer-events-none" aria-hidden="true"></div>
+
+  <!-- Particles container -->
+  <div id="particles" class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true"></div>
+
+  <div class="relative max-w-6xl mx-auto px-6 py-24 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+
+      <!-- Left: Text content (3/5) -->
+      <div class="lg:col-span-3 space-y-6">
+
+        <!-- Overline -->
+        <p class="section-overline load-anim load-delay-100">// HELLO, WORLD</p>
+
+        <!-- Name -->
+        <h1 class="font-display font-bold leading-[1.08] load-anim load-delay-250">
+          <span class="block text-5xl md:text-6xl xl:text-7xl gradient-text">Piyush Kumar</span>
+        </h1>
+
+        <!-- Typewriter title -->
+        <div class="flex items-center gap-1 h-8 load-anim load-delay-450">
+          <span class="font-display text-xl md:text-2xl text-[var(--text-secondary)] font-light" id="typewriter-text"></span>
+          <span class="typewriter-cursor" aria-hidden="true"></span>
+        </div>
+
+        <!-- Bio -->
+        <p class="text-[var(--text-primary)] text-lg leading-relaxed max-w-lg load-anim load-delay-600 opacity-90">
+          Senior Software Engineer with <strong class="text-[var(--text-primary)]">5+ years</strong> building Python backends, cloud-native APIs, and data pipelines. Currently at <strong class="text-accent-cyan">Atari Games</strong>.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap items-center gap-4 load-anim load-delay-800">
+          <a
+            href="#experience"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-accent-cyan to-accent-violet text-white font-semibold text-sm transition-all duration-200 hover:brightness-110 hover:scale-[1.02] hover:shadow-glow-cyan active:scale-[0.98]"
+          >
+            View My Experience
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[var(--border)] bg-[var(--bg-surface)]/80 backdrop-blur-sm text-[var(--text-primary)] font-medium text-sm transition-all duration-200 hover:border-accent-cyan/50 hover:bg-accent-cyan/10"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+            </svg>
+            Download Resume
+          </a>
+
+          <!-- Social icons -->
+          <div class="flex items-center gap-3 ml-2">
+            <a
+              href="https://linkedin.com/in/piyushkumar0"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              class="w-9 h-9 rounded-lg border border-[var(--border)] bg-[var(--bg-surface)]/80 backdrop-blur-sm flex items-center justify-center text-[var(--text-primary)] hover:text-accent-cyan hover:border-accent-cyan/40 transition-all duration-200"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            <a
+              href="mailto:k.piyushkumar98@gmail.com"
+              aria-label="Email"
+              class="w-9 h-9 rounded-lg border border-[var(--border)] bg-[var(--bg-surface)]/80 backdrop-blur-sm flex items-center justify-center text-[var(--text-primary)] hover:text-accent-cyan hover:border-accent-cyan/40 transition-all duration-200"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="flex flex-wrap gap-8 pt-4 load-anim load-delay-1000">
+          <div class="flex flex-col">
+            <span class="font-display font-bold text-3xl text-accent-cyan" data-target="5" data-suffix="+">5+</span>
+            <span class="text-xs text-[var(--text-secondary)] mt-1 font-medium uppercase tracking-wider">Years Exp.</span>
+          </div>
+          <div class="w-px bg-[var(--border)]"></div>
+          <div class="flex flex-col">
+            <span class="font-display font-bold text-3xl text-accent-cyan" data-target="2" data-suffix="">2</span>
+            <span class="text-xs text-[var(--text-secondary)] mt-1 font-medium uppercase tracking-wider">Companies</span>
+          </div>
+          <div class="w-px bg-[var(--border)]"></div>
+          <div class="flex flex-col">
+            <span class="font-display font-bold text-3xl text-accent-cyan">$40k+</span>
+            <span class="text-xs text-[var(--text-secondary)] mt-1 font-medium uppercase tracking-wider">Direct Revenue Impact</span>
+          </div>
+          <div class="w-px bg-[var(--border)]"></div>
+          <div class="flex flex-col">
+            <span class="font-display font-bold text-3xl text-accent-cyan" data-target="20" data-suffix="+">20+</span>
+            <span class="text-xs text-[var(--text-secondary)] mt-1 font-medium uppercase tracking-wider">People Mentored</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Terminal (2/5) -->
+      <div class="lg:col-span-2 relative load-from-right hidden lg:block">
+        <TerminalWindow />
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 load-anim load-delay-1500">
+    <a href="#about" aria-label="Scroll down" class="flex flex-col items-center gap-2 text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors">
+      <span class="text-xs font-mono tracking-widest uppercase">Scroll</span>
+      <svg class="w-4 h-4 animate-bounce-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<script>
+  // Typewriter effect
+  const titles = [
+    'Senior Software Engineer',
+    'Python Specialist',
+    'Systems Architect',
+    'Cloud & AWS Developer',
+  ];
+  let titleIdx = 0;
+  let charIdx = 0;
+  let isDeleting = false;
+  const el = document.getElementById('typewriter-text');
+
+  function typeStep() {
+    if (!el) return;
+    const current = titles[titleIdx];
+    if (!isDeleting) {
+      el.textContent = current.slice(0, charIdx + 1);
+      charIdx++;
+      if (charIdx === current.length) {
+        isDeleting = true;
+        setTimeout(typeStep, 2200);
+        return;
+      }
+      setTimeout(typeStep, 55);
+    } else {
+      el.textContent = current.slice(0, charIdx - 1);
+      charIdx--;
+      if (charIdx === 0) {
+        isDeleting = false;
+        titleIdx = (titleIdx + 1) % titles.length;
+        setTimeout(typeStep, 400);
+        return;
+      }
+      setTimeout(typeStep, 28);
+    }
+  }
+  setTimeout(typeStep, 1500);
+
+  // Floating particles
+  const container = document.getElementById('particles');
+  if (container) {
+    for (let i = 0; i < 25; i++) {
+      const p = document.createElement('div');
+      const size = Math.random() * 2.5 + 0.5;
+      p.className = 'particle';
+      p.style.cssText = `
+        width: ${size}px; height: ${size}px;
+        left: ${Math.random() * 100}%;
+        top: ${Math.random() * 100}%;
+        opacity: ${Math.random() * 0.4 + 0.1};
+        animation: drift ${Math.random() * 15 + 12}s ease-in-out infinite;
+        animation-delay: ${Math.random() * -15}s;
+      `;
+      container.appendChild(p);
+    }
+  }
+</script>

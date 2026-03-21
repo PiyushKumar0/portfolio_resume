@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Google Fonts ─────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── CSS Custom Properties ────────────────────── */
+:root {
+  /* Light mode */
+  --bg-primary:    #F8FAFC;
+  --bg-surface:    #FFFFFF;
+  --bg-alt:        #EFF6FF;
+  --accent:        #0369A1;
+  --text-primary:  #0F172A;
+  --text-secondary:#475569;
+  --text-tertiary: #94A3B8;
+  --border:        #E2E8F0;
+  --navbar-bg:     rgba(255,255,255,0.85);
+}
+
+.dark {
+  --bg-primary:    #0A0F1E;
+  --bg-surface:    #0F1629;
+  --bg-alt:        #141D35;
+  --accent:        #00D4FF;
+  --text-primary:  #F0F4FF;
+  --text-secondary:#8892B0;
+  --text-tertiary: #4A5568;
+  --border:        #1E2A45;
+  --navbar-bg:     rgba(15,22,41,0.85);
+}
+
+/* ─── Base Reset ────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* Offset for fixed navbar */
+  section[id] { scroll-margin-top: 80px; }
+
+  /* Gradient text utility */
+  .gradient-text {
+    background: linear-gradient(135deg, #00D4FF 0%, #7C3AED 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Focus rings */
+  :focus-visible {
+    outline: 2px solid #00D4FF;
+    outline-offset: 3px;
+  }
+
+  /* Skip to content */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    padding: 0.5rem 1rem;
+    background: #00D4FF;
+    color: #0A0F1E;
+    font-weight: 600;
+    z-index: 9999;
+    transition: top 0.2s;
+  }
+  .skip-link:focus { top: 0; }
+}
+
+/* ─── Scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover { background: #00D4FF; }
+
+/* ─── Selection ─────────────────────────────────── */
+::selection {
+  background: rgba(0, 212, 255, 0.25);
+  color: var(--text-primary);
+}
+
+/* ─── Section Overline ──────────────────────────── */
+.section-overline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: #00D4FF;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+/* ─── Gradient Border ───────────────────────────── */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #00D4FF, #7C3AED);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ─── Card Base ─────────────────────────────────── */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+.card:hover {
+  border-color: rgba(0, 212, 255, 0.3);
+  box-shadow: 0 0 0 1px rgba(0,212,255,0.15), 0 20px 40px rgba(0,0,0,0.3);
+  transform: translateY(-4px);
+}
+
+/* ─── Grid Lines Background ─────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}

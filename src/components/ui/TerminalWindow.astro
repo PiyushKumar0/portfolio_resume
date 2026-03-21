@@ -1,0 +1,44 @@
+---
+// Fake terminal showing Piyush's stack as Python code
+---
+<div class="relative rounded-xl overflow-hidden border border-[var(--border)] shadow-card-default group animate float">
+  <!-- Terminal chrome -->
+  <div class="flex items-center gap-2 px-4 py-3 bg-[#0D1117] border-b border-[var(--border)]">
+    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+    <span class="ml-3 font-mono text-xs text-[var(--text-tertiary)]">piyush@atari:~/api</span>
+  </div>
+  <!-- Code body -->
+  <div class="bg-[#0D1117] p-5 font-mono text-sm leading-relaxed overflow-x-auto">
+    <pre class="text-[#E6EDF3]"><span class="text-purple-400">from</span> <span class="text-accent-cyan">fastapi</span> <span class="text-purple-400">import</span> FastAPI, Depends
+<span class="text-purple-400">from</span> <span class="text-accent-cyan">pydantic</span> <span class="text-purple-400">import</span> BaseModel
+<span class="text-purple-400">import</span> <span class="text-accent-cyan">pandas</span> <span class="text-purple-400">as</span> pd
+
+app = <span class="text-yellow-300">FastAPI</span>()
+
+<span class="text-green-400">@app.get</span>(<span class="text-orange-300">"/market-data/&#123;symbol&#125;"</span>)
+<span class="text-purple-400">async def</span> <span class="text-yellow-300">get_market_data</span>(
+    symbol: <span class="text-accent-teal">str</span>,
+    db = <span class="text-yellow-300">Depends</span>(get_db)
+):
+    <span class="text-slate-500"># 40% faster than legacy batch jobs</span>
+    data = <span class="text-purple-400">await</span> db.<span class="text-yellow-300">fetch</span>(symbol)
+    <span class="text-purple-400">return</span> &#123;<span class="text-orange-300">"status"</span>: <span class="text-orange-300">"ok"</span>, <span class="text-orange-300">"data"</span>: data&#125;</pre>
+  </div>
+  <!-- Glow overlay on hover -->
+  <div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+    style="box-shadow: inset 0 0 30px rgba(0,212,255,0.05);">
+  </div>
+</div>
+
+<!-- Floating tech badges -->
+<div class="absolute -top-3 -right-3 bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg px-3 py-1.5 text-xs font-mono text-accent-cyan shadow-glow-cyan animate-float" style="animation-delay: 0.5s">
+  GenAI ⚡
+</div>
+<div class="absolute -bottom-3 -left-3 bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg px-3 py-1.5 text-xs font-mono text-purple-400 shadow-glow-violet animate-float" style="animation-delay: 1.2s">
+  AWS ☁️
+</div>
+<div class="absolute top-1/2 -right-4 bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg px-3 py-1.5 text-xs font-mono text-green-400 animate-float" style="animation-delay: 2s">
+  Python 🐍
+</div>

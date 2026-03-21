@@ -1,0 +1,91 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import Badge from '../ui/Badge.astro';
+import { experiences } from '../../data/experience';
+---
+
+<section id="experience" class="py-24 bg-[var(--bg-primary)]">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="anim fade-up">
+      <SectionHeading overline="EXPERIENCE" title="Where I've Worked" />
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <!-- Vertical line -->
+      <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent-cyan via-accent-violet to-transparent"></div>
+
+      <div class="space-y-10">
+        {experiences.map((exp, i) => (
+          <div class={`relative pl-16 anim fade-right`} style={`transition-delay: ${i * 120}ms`}>
+            <!-- Timeline dot -->
+            <div class="absolute left-6 top-6 -translate-x-1/2">
+              <div class={`w-3 h-3 rounded-full border-2 ${exp.current ? 'bg-accent-cyan border-accent-cyan' : 'bg-accent-violet border-accent-violet'} z-10 relative`}></div>
+              {exp.current && (
+                <div class="absolute inset-0 w-3 h-3 rounded-full bg-accent-cyan/40 animate-ping"></div>
+              )}
+            </div>
+
+            <!-- Card -->
+            <div class="card p-6 md:p-8 group">
+              <!-- Header -->
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+                <div>
+                  <div class="flex items-center gap-2 flex-wrap mb-1">
+                    <h3 class="font-display font-semibold text-lg text-[var(--text-primary)]">{exp.role}</h3>
+                    {exp.current && (
+                      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium bg-green-500/15 border border-green-500/30 text-green-400">
+                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                        Current
+                      </span>
+                    )}
+                  </div>
+                  <div class="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+                    <span class="font-medium text-accent-cyan">{exp.company}</span>
+                    <span>·</span>
+                    <span>{exp.location}</span>
+                  </div>
+                </div>
+                <div class="flex flex-col items-start sm:items-end gap-1.5 flex-shrink-0">
+                  <span class="text-xs font-mono text-[var(--text-tertiary)] whitespace-nowrap">{exp.period}</span>
+                  <Badge text={exp.type} variant="company" />
+                </div>
+              </div>
+
+              <!-- Projects & bullets -->
+              <div class="space-y-5">
+                {exp.projects.map(proj => (
+                  <div>
+                    {proj.url ? (
+                      <a href={proj.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-mono text-accent-teal mb-3 tracking-wide uppercase hover:underline underline-offset-2">
+                        {proj.name}
+                        <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                      </a>
+                    ) : (
+                      <p class="text-xs font-mono text-accent-teal mb-3 tracking-wide uppercase">{proj.name}</p>
+                    )}
+                    <ul class="space-y-2">
+                      {proj.bullets.map(bullet => (
+                        <li class="flex items-baseline gap-3 text-sm text-[var(--text-secondary)] leading-relaxed">
+                          <span class="text-accent-cyan flex-shrink-0">▹</span>
+                          <span set:html={bullet}></span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              <!-- Tech badges -->
+              <div class="flex flex-wrap gap-2 mt-5 pt-5 border-t border-[var(--border)]">
+                {exp.tech.map(t => (
+                  <Badge text={t} variant="skill" />
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

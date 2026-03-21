@@ -1,0 +1,63 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import { achievements } from '../../data/achievements';
+
+const featured    = achievements.filter(a => a.featured);
+const nonFeatured = achievements.filter(a => !a.featured);
+---
+
+<section id="achievements" class="py-24 bg-[var(--bg-alt)]">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="anim fade-up">
+      <SectionHeading overline="ACHIEVEMENTS" title="Recognition & Impact" />
+    </div>
+
+    <!-- Revenue impact callout -->
+    <div class="card mb-10 p-6 md:p-8 bg-gradient-to-r from-accent-cyan/5 to-accent-violet/5 border-accent-cyan/20 anim fade-up" style="transition-delay: 50ms">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div class="text-4xl">💰</div>
+        <div>
+          <div class="font-display font-bold text-3xl md:text-4xl text-accent-cyan">$40,000 / month</div>
+          <p class="text-[var(--text-secondary)] mt-1">Revenue impact through optimising data delivery speed by 30% at PIMCO (via Gemini Solutions)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured achievement cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+      {featured.map((ach, i) => (
+        <div
+          class="card p-6 relative overflow-hidden anim scale-in"
+          style={`transition-delay: ${i * 100}ms`}
+        >
+          <!-- Gradient left border -->
+          <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-accent-cyan to-accent-violet rounded-l-xl"></div>
+
+          <div class="pl-2">
+            <div class="text-3xl mb-3">{ach.icon}</div>
+            <h3 class="font-display font-semibold text-[var(--text-primary)] text-sm leading-snug mb-1">{ach.title}</h3>
+            <p class="text-xs text-accent-cyan font-mono mb-3">{ach.issuer}</p>
+            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">{ach.description}</p>
+            <div class="mt-4">
+              <span class="text-xs font-mono text-[var(--text-tertiary)]">{ach.year}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Additional achievements list -->
+    <div class="card divide-y divide-[var(--border)] anim fade-up" style="transition-delay: 300ms">
+      {nonFeatured.map(ach => (
+        <div class="flex items-center gap-4 p-4 group hover:bg-[var(--bg-alt)] transition-colors rounded-xl">
+          <span class="text-xl flex-shrink-0">{ach.icon}</span>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-[var(--text-primary)] group-hover:text-accent-cyan transition-colors">{ach.title}</p>
+            <p class="text-xs text-[var(--text-secondary)] mt-0.5 truncate">{ach.issuer}</p>
+          </div>
+          <span class="text-xs font-mono text-[var(--text-tertiary)] flex-shrink-0">{ach.year}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
