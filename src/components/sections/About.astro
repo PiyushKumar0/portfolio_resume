@@ -1,10 +1,10 @@
 ---
 import SectionHeading from '../ui/SectionHeading.astro';
 
-const stats = [
-  { value: 5, suffix: '+', label: 'Years Exp.' },
-  { value: 2, suffix: '',  label: 'Companies' },
-  { value: 1, suffix: '',  label: 'Research Paper' },
+const companies = [
+  { name: 'Atari', logo: '/atari-logo.png' },
+  { name: 'PIMCO', logo: '/pimco-logo.png' },
+  { name: 'Gemini Solutions', logo: '/gemini-solutions-logo.jpeg' },
 ];
 ---
 
@@ -55,14 +55,11 @@ const stats = [
           </p>
         </div>
 
-        <!-- Mini stats -->
+        <!-- Company logos -->
         <div class="grid grid-cols-3 gap-4 mt-8">
-          {stats.map(s => (
-            <div class="card p-4 text-center">
-              <div class="font-display font-bold text-2xl text-accent-cyan" data-target={s.value} data-suffix={s.suffix}>
-                {s.value}{s.suffix}
-              </div>
-              <div class="text-xs text-[var(--text-secondary)] mt-1 uppercase tracking-wider font-medium">{s.label}</div>
+          {companies.map(c => (
+            <div class="card p-4 flex items-center justify-center">
+              <img src={c.logo} alt={c.name} class="h-20 w-auto object-contain" />
             </div>
           ))}
         </div>
