@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import favicon from '/public/favicon.png';
+
 const navLinks = [
   { href: '#about',        label: 'About' },
   { href: '#experience',   label: 'Experience' },
@@ -18,8 +21,8 @@ const navLinks = [
 
     <!-- Logo -->
     <a href="#hero" class="flex items-center gap-3 group" aria-label="Piyush Kumar - Home">
-      <img src="/favicon.png" alt="Piyush Kumar" class="h-6 w-auto" />
-      <span class="hidden sm:block font-display font-medium text-sm text-[var(--text-primary)] transition-colors">
+      <Image src={favicon} alt="Piyush Kumar" class="hidden sm:block h-6 w-auto" />
+      <span class="font-display font-medium text-sm text-[var(--text-primary)] transition-colors">
         Piyush Kumar
       </span>
     </a>
@@ -55,11 +58,11 @@ const navLinks = [
         aria-label="Toggle theme"
       >
         <!-- Sun icon (shown in dark mode) -->
-        <svg id="icon-sun" class="w-4.5 h-4.5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg id="icon-sun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
         <!-- Moon icon (shown in light mode) -->
-        <svg id="icon-moon" class="w-4.5 h-4.5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg id="icon-moon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
         </svg>
       </button>
@@ -82,7 +85,7 @@ const navLinks = [
 <!-- Mobile Menu Drawer -->
 <div
   id="mobile-menu"
-  class="fixed inset-0 z-40 pointer-events-none"
+  class="fixed inset-0 z-[60] pointer-events-none"
   aria-hidden="true"
 >
   <!-- Backdrop -->
@@ -137,7 +140,8 @@ const navLinks = [
     if (!navbar) return;
     if (window.scrollY > 20) {
       navbar.style.background = 'var(--navbar-bg)';
-      navbar.style.backdropFilter = 'blur(12px)';
+      navbar.style.backdropFilter = 'blur(4px)';
+      navbar.style.webkitBackdropFilter = 'blur(4px)';
       navbar.style.borderBottom = '1px solid var(--border)';
       navbar.style.boxShadow = '0 4px 24px rgba(0,0,0,0.15)';
     } else {
@@ -180,7 +184,10 @@ const navLinks = [
     document.body.style.overflow = '';
   }
 
-  menuBtn?.addEventListener('click', openMenu);
+  menuBtn?.addEventListener('click', () => {
+    const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
+    isOpen ? closeMenu() : openMenu();
+  });
   closeBtn?.addEventListener('click', closeMenu);
   backdrop?.addEventListener('click', closeMenu);
   mobileLinks.forEach(l => l.addEventListener('click', closeMenu));
