@@ -5,6 +5,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Prevent horizontal overflow on mobile ───── */
+html {
+  overflow-x: hidden;
+}
+
 /* ─── CSS Custom Properties ────────────────────── */
 :root {
   /* Light mode */

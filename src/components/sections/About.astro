@@ -1,10 +1,15 @@
 ---
+import { Image } from 'astro:assets';
 import SectionHeading from '../ui/SectionHeading.astro';
+import avatar from '/public/avatar.png';
+import atariLogo from '/public/atari-logo.png';
+import pimcoLogo from '/public/pimco-logo.png';
+import geminiLogo from '/public/gemini-solutions-logo.jpeg';
 
 const companies = [
-  { name: 'Atari', logo: '/atari-logo.png' },
-  { name: 'PIMCO', logo: '/pimco-logo.png' },
-  { name: 'Gemini Solutions', logo: '/gemini-solutions-logo.jpeg' },
+  { name: 'Atari', logo: atariLogo },
+  { name: 'PIMCO', logo: pimcoLogo },
+  { name: 'Gemini Solutions', logo: geminiLogo },
 ];
 ---
 
@@ -20,7 +25,7 @@ const companies = [
           <div class="absolute -bottom-3 -right-3 w-full h-full rounded-2xl border border-accent-cyan/20"></div>
           <!-- Photo container -->
           <div class="relative w-full h-full rounded-2xl overflow-hidden border border-[var(--border)] bg-[var(--bg-surface)]">
-            <img src="/avatar.png" alt="Piyush Kumar" class="w-full h-full object-cover" />
+            <Image src={avatar} alt="Piyush Kumar" class="w-full h-full object-cover" />
           </div>
         </div>
 
@@ -59,7 +64,7 @@ const companies = [
         <div class="grid grid-cols-3 gap-4 mt-8">
           {companies.map(c => (
             <div class="card p-4 flex items-center justify-center">
-              <img src={c.logo} alt={c.name} class="h-20 w-auto object-contain" />
+              <Image src={c.logo} alt={c.name} class="h-20 w-auto object-contain" />
             </div>
           ))}
         </div>
