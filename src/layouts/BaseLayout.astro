@@ -1,4 +1,7 @@
 ---
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
+
 interface Props {
   title?: string;
   description?: string;
@@ -21,7 +24,7 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://piyushkumar.dev" />
+    <meta property="og:url" content="https://piyushkumar0.vercel.app" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -29,7 +32,7 @@ const {
     <meta name="twitter:description" content={description} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon_white.svg" />
-    <link rel="canonical" href="https://piyushkumar.dev" />
+    <link rel="canonical" href="https://piyushkumar0.vercel.app" />
 
     <!-- Preconnect for Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -115,5 +118,7 @@ const {
       );
       document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
     </script>
+    <Analytics />
+    <SpeedInsights />
   </body>
 </html>
