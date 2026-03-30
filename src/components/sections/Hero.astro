@@ -1,8 +1,9 @@
 ---
-import TerminalWindow from '../ui/TerminalWindow.astro';
+import { Image } from 'astro:assets';
+import avatar from '/public/avatar.png';
 ---
 
-<section id="hero" class="relative min-h-screen flex items-center overflow-hidden grid-bg">
+<section id="hero" class="relative min-h-0 lg:min-h-screen flex items-start md:items-center overflow-hidden grid-bg">
 
   <!-- Background blobs -->
   <div class="absolute inset-0 hero-glow pointer-events-none" aria-hidden="true"></div>
@@ -12,30 +13,45 @@ import TerminalWindow from '../ui/TerminalWindow.astro';
   <!-- Particles container -->
   <div id="particles" class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true"></div>
 
-  <div class="relative max-w-6xl mx-auto px-6 py-24 w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+  <div class="relative max-w-6xl mx-auto px-6 pt-28 pb-24 md:py-24 w-full">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
 
       <!-- Left: Text content (3/5) -->
-      <div class="lg:col-span-3 space-y-6">
+      <div class="md:col-span-3 space-y-6">
 
-        <!-- Overline -->
-        <p class="section-overline load-anim load-delay-100">// HELLO, WORLD</p>
+        <!-- Mobile-only avatar (visible below md) -->
+        <div class="flex md:hidden justify-center load-anim load-delay-100">
+          <div class="relative w-32 h-32 rounded-full p-0.5 bg-gradient-to-br from-accent-cyan via-accent-violet to-accent-cyan shadow-glow-cyan">
+            <div class="w-full h-full rounded-full overflow-hidden border-2 border-navy">
+              <Image src={avatar} alt="Piyush Kumar" class="w-full h-full object-cover" loading="eager" />
+            </div>
+          </div>
+        </div>
 
         <!-- Name -->
-        <h1 class="font-display font-bold leading-[1.08] load-anim load-delay-250">
+        <h1 class="font-display font-bold leading-[1.08] load-anim load-delay-100">
           <span class="block text-5xl md:text-6xl xl:text-7xl gradient-text">Piyush Kumar</span>
         </h1>
 
         <!-- Typewriter title -->
-        <div class="flex items-center gap-1 h-8 load-anim load-delay-450">
+        <div class="flex items-center gap-1 h-8 load-anim load-delay-250">
           <span class="font-display text-xl md:text-2xl text-[var(--text-secondary)] font-light" id="typewriter-text"></span>
           <span class="typewriter-cursor" aria-hidden="true"></span>
         </div>
 
         <!-- Bio -->
-        <p class="text-[var(--text-primary)] text-lg leading-relaxed max-w-lg load-anim load-delay-600 opacity-90">
-          Senior Software Engineer with <strong class="text-[var(--text-primary)]">5+ years</strong> building Python backends, cloud-native APIs, and data pipelines. Currently at <strong class="text-accent-cyan">Atari Games</strong>.
+        <p class="text-[var(--text-primary)] text-lg leading-relaxed max-w-lg load-anim load-delay-450 opacity-90">
+          Senior Software Engineer with <strong class="text-[var(--text-primary)]">5+ years</strong> building Python backends, cloud-native APIs, and data pipelines. Currently at <strong class="text-accent-cyan">Atari</strong>.
         </p>
+
+        <!-- Static tech pills -->
+        <div class="flex flex-wrap gap-2 load-anim load-delay-600">
+          {['Python', 'FastAPI', 'AWS', 'Data Pipelines'].map(label => (
+            <span class="px-3 py-1 rounded-full border border-[var(--border)] text-sm font-medium text-[var(--text-secondary)]">
+              {label}
+            </span>
+          ))}
+        </div>
 
         <!-- CTAs -->
         <div class="flex flex-wrap items-center gap-4 load-anim load-delay-800">
@@ -49,7 +65,7 @@ import TerminalWindow from '../ui/TerminalWindow.astro';
             </svg>
           </a>
           <a
-            href="https://drive.google.com/file/d/1zuUL6v5Vj0C4XX5Mz12sGu-_0HrtyYI6/view?usp=sharing"
+            href="/resources/Piyush_Kumar_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[var(--border)] bg-[var(--bg-surface)]/80 backdrop-blur-sm text-[var(--text-primary)] font-medium text-sm transition-all duration-200 hover:border-accent-cyan/50 hover:bg-accent-cyan/10"
@@ -62,6 +78,17 @@ import TerminalWindow from '../ui/TerminalWindow.astro';
 
           <!-- Social icons -->
           <div class="flex items-center gap-3 ml-2">
+            <a
+              href="https://github.com/PiyushKumar0"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              class="w-9 h-9 rounded-lg border border-[var(--border)] bg-[var(--bg-surface)]/80 backdrop-blur-sm flex items-center justify-center text-[var(--text-primary)] hover:text-accent-cyan hover:border-accent-cyan/40 transition-all duration-200"
+            >
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </a>
             <a
               href="https://linkedin.com/in/piyushkumar0"
               target="_blank"
@@ -86,38 +113,51 @@ import TerminalWindow from '../ui/TerminalWindow.astro';
         </div>
 
         <!-- Stats -->
-        <div class="flex flex-wrap gap-8 pt-4 load-anim load-delay-1000">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-4 load-anim load-delay-1000">
           <div class="flex flex-col">
             <span class="font-display font-bold text-3xl text-accent-cyan" data-target="5" data-suffix="+">5+</span>
             <span class="text-xs text-[var(--text-secondary)] mt-1 font-medium uppercase tracking-wider">Years Exp.</span>
           </div>
-          <div class="w-px bg-[var(--border)]"></div>
           <div class="flex flex-col">
-            <span class="font-display font-bold text-3xl text-accent-cyan" data-target="2" data-suffix="">2</span>
-            <span class="text-xs text-[var(--text-secondary)] mt-1 font-medium uppercase tracking-wider">Companies</span>
+            <span class="font-display font-bold text-3xl text-accent-cyan" data-target="15" data-suffix="+">15+</span>
+            <span class="text-xs text-[var(--text-secondary)] mt-1 font-medium uppercase tracking-wider">Projects</span>
           </div>
-          <div class="w-px bg-[var(--border)]"></div>
-          <div class="flex flex-col">
-            <span class="font-display font-bold text-3xl text-accent-cyan">$40k+</span>
-            <span class="text-xs text-[var(--text-secondary)] mt-1 font-medium uppercase tracking-wider">Direct Revenue Impact</span>
-          </div>
-          <div class="w-px bg-[var(--border)]"></div>
           <div class="flex flex-col">
             <span class="font-display font-bold text-3xl text-accent-cyan" data-target="20" data-suffix="+">20+</span>
             <span class="text-xs text-[var(--text-secondary)] mt-1 font-medium uppercase tracking-wider">People Mentored</span>
           </div>
+          <div class="flex flex-col">
+            <span class="font-display font-bold text-3xl text-accent-cyan" data-target="90" data-suffix="%+">90%+</span>
+            <span class="text-xs text-[var(--text-secondary)] mt-1 font-medium uppercase tracking-wider">Ops Automated</span>
+          </div>
         </div>
       </div>
 
-      <!-- Right: Terminal (2/5) -->
-      <div class="lg:col-span-2 relative load-from-right hidden lg:block">
-        <TerminalWindow />
+      <!-- Right: Avatar with pop style (2/5) -->
+      <div class="md:col-span-2 relative load-from-right hidden md:flex items-center justify-center">
+        <div class="hero-avatar-wrapper relative">
+          <!-- Glow background -->
+          <div class="absolute -inset-6 rounded-full bg-gradient-to-br from-accent-cyan/20 to-accent-violet/20 blur-2xl animate-pulse-ring" aria-hidden="true"></div>
+          <!-- Gradient ring -->
+          <div class="relative w-52 h-52 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full p-1 bg-gradient-to-br from-accent-cyan via-accent-violet to-accent-cyan shadow-glow-cyan animate-float">
+            <div class="w-full h-full rounded-full overflow-hidden border-2 border-navy">
+              <Image src={avatar} alt="Piyush Kumar" class="w-full h-full object-cover" loading="eager" />
+            </div>
+          </div>
+          <!-- Floating badges -->
+          <div class="absolute -top-2 -right-2 px-3 py-1.5 rounded-full bg-[var(--bg-surface)] border border-accent-cyan/30 text-xs font-medium text-accent-cyan shadow-glow-cyan animate-float" style="animation-delay: -2s;">
+            Python
+          </div>
+          <div class="absolute -bottom-2 -left-2 px-3 py-1.5 rounded-full bg-[var(--bg-surface)] border border-accent-violet/30 text-xs font-medium text-accent-violet shadow-glow-violet animate-float" style="animation-delay: -4s;">
+            Senior SDE
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 load-anim load-delay-1500">
+  <div class="absolute bottom-8 inset-x-0 flex justify-center load-anim load-delay-1500">
     <a href="#about" aria-label="Scroll down" class="flex flex-col items-center gap-2 text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] transition-colors">
       <span class="text-xs font-mono tracking-widest uppercase">Scroll</span>
       <svg class="w-4 h-4 animate-bounce-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">

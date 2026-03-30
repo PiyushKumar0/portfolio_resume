@@ -15,10 +15,10 @@ export const education: Education[] = [
     location: 'Ghaziabad, Uttar Pradesh (AKTU)',
     period: 'August 2017 – July 2021',
     highlights: [
-      'Published research paper on AI based price prediction, “Krishi: A Price Prediction System” (Paper ID: 151698)',
+      'Published research paper on AI based price prediction for agricultural commodities using SARIMA model',
       'Smart India Hackathon 2020 finalist',
-      'Represented college in inter-university competitions, such as IIT-Roorkee',
       'Freelance graphic designer and social media manager for college literary club',
+      'Represented college and won at multiple national level events, e.g., IIT-Roorkee',
     ],
   },
 ];

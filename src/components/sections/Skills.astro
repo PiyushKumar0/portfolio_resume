@@ -35,15 +35,14 @@ import { skills, skillCategories } from '../../data/skills';
     <!-- Skills grid -->
     <div
       id="skills-grid"
-      class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3 stagger"
+      class="flex flex-wrap justify-center gap-3 stagger"
     >
       {skills.map(skill => (
         <div
-          class="skill-item anim scale-in card p-3 flex flex-col items-center gap-2 text-center cursor-default"
+          class="skill-item anim scale-in px-4 py-2 rounded-full border border-[var(--border)] text-sm font-medium text-[var(--text-secondary)] cursor-default transition-all duration-200 hover:border-accent-cyan/40 hover:text-accent-cyan hover:bg-accent-cyan/5"
           data-category={skill.category}
         >
-          <span class="text-2xl" role="img" aria-label={skill.name}>{skill.icon}</span>
-          <span class="text-xs font-medium text-[var(--text-secondary)] leading-tight">{skill.name}</span>
+          {skill.name}
         </div>
       ))}
     </div>
@@ -67,7 +66,7 @@ import { skills, skillCategories } from '../../data/skills';
     color: #00D4FF;
   }
   .skill-item {
-    transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.2s, box-shadow 0.2s;
+    transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.2s, box-shadow 0.2s, color 0.2s, background 0.2s;
   }
   .skill-item.hidden {
     display: none;

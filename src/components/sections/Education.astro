@@ -12,8 +12,10 @@ import { education } from '../../data/education';
     {education.map(edu => (
       <div class="card p-8 anim scale-in flex flex-col sm:flex-row gap-6">
         <!-- Icon -->
-        <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-accent-cyan/15 to-accent-violet/15 border border-[var(--border)] flex items-center justify-center text-2xl">
-          🎓
+        <div class="flex-shrink-0 w-14 h-14 rounded-xl bg-gradient-to-br from-accent-cyan/15 to-accent-violet/15 border border-[var(--border)] flex items-center justify-center text-accent-cyan">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15v-3.75m0 0h10.5" />
+          </svg>
         </div>
         <!-- Info -->
         <div class="flex-1">
@@ -32,7 +34,7 @@ import { education } from '../../data/education';
             <ul class="space-y-1.5 mt-4">
               {edu.highlights.map(h => (
                 <li class="flex gap-2 text-sm text-[var(--text-secondary)]">
-                  <span class="text-accent-cyan mt-1 flex-shrink-0">▹</span>
+                  <span class="text-accent-cyan flex-shrink-0 text-xs">&bull;</span>
                   {h}
                 </li>
               ))}

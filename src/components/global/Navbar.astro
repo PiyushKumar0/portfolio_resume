@@ -28,7 +28,7 @@ const navLinks = [
     </a>
 
     <!-- Desktop Nav -->
-    <nav class="hidden md:flex items-center gap-8" aria-label="Main navigation">
+    <nav class="hidden md:flex items-center gap-4 lg:gap-8" aria-label="Main navigation">
       {navLinks.map(link => (
         <a href={link.href} class="nav-link text-sm font-medium py-1">
           {link.label}
@@ -40,10 +40,10 @@ const navLinks = [
     <div class="flex items-center gap-3">
       <!-- Resume button -->
       <a
-        href="https://drive.google.com/file/d/1zuUL6v5Vj0C4XX5Mz12sGu-_0HrtyYI6/view?usp=sharing"
+        href="/resources/Piyush_Kumar_Resume.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg border border-accent-cyan/40 text-accent-cyan text-sm font-medium transition-all duration-200 hover:bg-accent-cyan/10 hover:border-accent-cyan"
+        class="hidden lg:flex items-center gap-2 px-4 py-2 rounded-lg border border-accent-cyan/40 text-accent-cyan text-sm font-medium transition-all duration-200 hover:bg-accent-cyan/10 hover:border-accent-cyan"
       >
         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
@@ -122,12 +122,12 @@ const navLinks = [
     </nav>
     <div class="mt-auto pt-6 border-t border-[var(--border)]">
       <a
-        href="https://drive.google.com/file/d/1zuUL6v5Vj0C4XX5Mz12sGu-_0HrtyYI6/view?usp=sharing"
+        href="/resources/Piyush_Kumar_Resume.pdf"
         target="_blank"
         rel="noopener noreferrer"
         class="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg bg-gradient-to-r from-accent-cyan to-accent-violet text-white text-sm font-semibold transition-all"
       >
-        Download Resume
+        View Resume
       </a>
     </div>
   </div>
@@ -141,7 +141,7 @@ const navLinks = [
     if (window.scrollY > 20) {
       navbar.style.background = 'var(--navbar-bg)';
       navbar.style.backdropFilter = 'blur(4px)';
-      navbar.style.webkitBackdropFilter = 'blur(4px)';
+      navbar.style.setProperty('-webkit-backdrop-filter', 'blur(4px)');
       navbar.style.borderBottom = '1px solid var(--border)';
       navbar.style.boxShadow = '0 4px 24px rgba(0,0,0,0.15)';
     } else {
@@ -152,11 +152,15 @@ const navLinks = [
     }
   }, { passive: true });
 
-  // Theme toggle
+  // Theme toggle with fade transition
   const btn = document.getElementById('theme-toggle');
   btn?.addEventListener('click', () => {
+    document.documentElement.classList.add('theme-transitioning');
     const isDark = document.documentElement.classList.toggle('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    setTimeout(() => {
+      document.documentElement.classList.remove('theme-transitioning');
+    }, 400);
   });
 
   // Mobile menu
